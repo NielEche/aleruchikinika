@@ -10,7 +10,6 @@ export default function Document() {
         <meta property="og:image:alt" content="Logo for Aleruchi Kinika " />
         <meta property="og:url" content="https://aleruchikinika.com" />
         <meta property="og:type" content="website" />
-        <title>Aleruchi Kinika</title>
       </Head>
       <body>
         <Main />

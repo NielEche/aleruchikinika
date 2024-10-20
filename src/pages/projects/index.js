@@ -2,6 +2,7 @@ import Link from 'next/link';
 import useContentful from '../../lib/useContentful';
 import "../../partials/projects.css";
 import Loading from '../../app/components/Loading';
+import Image from 'next/image';
 
 
 const ProjectsPage = () => {
@@ -11,6 +12,11 @@ const ProjectsPage = () => {
     return <Loading />; 
   }
 
+  const formatImageUrl = (url) => {
+    if (!url) return '';
+    return url.startsWith('http') ? url : `https:${url}`;
+  };
+
   return (
     <div className='mainCon lg:px-20 px-10'>
       <h1 className='py-10 text-xl orpheusproMedium'>Projects</h1>
@@ -19,11 +25,12 @@ const ProjectsPage = () => {
           <div key={project.id} className="project-card">
             <Link href={`/projects/${project.id}`} className="project-link">
               <div className="image-container">
-                <img
-                  src={project.cover}
-                  alt={`${project.title} cover`}
-                  className="project-image"
-                />
+              <Image
+              src={formatImageUrl(project.cover)} // Use the utility function to format the URL
+              alt={`${project.title} cover`}
+              fill
+              className="project-image"
+            />
                 <h2 className="project-title orpheusproMedium">{project.title}</h2>
               </div>
             </Link>

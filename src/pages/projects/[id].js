@@ -4,6 +4,7 @@ import useContentful from '../../lib/useContentful';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import "../../partials/projects.css";
 import Loading from '../../app/components/Loading';
+import Image from 'next/image';
 
 const ProjectDetail = () => {
   const { query } = useRouter();
@@ -45,18 +46,27 @@ const ProjectDetail = () => {
           <div className='orpheusproMedium'>{documentToReactComponents(project.about)}</div>
         </div>
         <div className='w-full object-contain'>
-          <img className='object-contain projectMain flex justify-center w-full' src={project.cover} alt={`${project.title} cover`}   onClick={() => openModal(project.cover)}/>
+          <Image 
+            className='object-contain projectMain flex justify-center w-full' 
+            src={`https:${project.cover}`} // Make sure to prepend https:
+            alt={`${project.title} cover`} 
+            width={800} // Specify width
+            height={600} // Specify height
+            onClick={() => openModal(project.cover)} 
+          />
         </div>
       </div>
       <hr />
 
       <div className='lg:grid grid-cols-2 gap-4 mt-10'>
         {project.images.map((image, idx) => (
-          <img
+          <Image
             className='w-full object-contain projectDoc py-4 cursor-pointer'
             key={idx}
-            src={image}
+            src={`https:${image}`} // Prepend https: if necessary
             alt={`${project.title} image ${idx + 1}`}
+            width={400} // Specify width
+            height={300} // Specify height
             onClick={() => openModal(image)} // Open modal on click
           />
         ))}
@@ -66,7 +76,13 @@ const ProjectDetail = () => {
       {isModalOpen && (
         <div className='modal-overlay' onClick={closeModal}>
           <div className='modal-content'>
-            <img src={selectedImage} alt='Selected project image' className='modal-image' />
+            <Image 
+              src={`https:${selectedImage}`} // Prepend https: if necessary
+              alt='Selected project image' 
+              className='modal-image' 
+              width={800} // Specify width for modal image
+              height={600} // Specify height for modal image
+            />
           </div>
         </div>
       )}
