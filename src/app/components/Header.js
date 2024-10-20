@@ -1,12 +1,13 @@
-"use client";
-
+"use client"; // Import necessary hooks and libraries
 import Link from 'next/link';
 import Image from 'next/image';
 import { useState } from 'react';
+import { useRouter } from 'next/router'; // Import useRouter
 import logoImage from '../../assets/aktext.png'; 
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false); // State for toggling the mobile menu
+  const router = useRouter(); // Get the router instance
 
   const toggleMenu = () => {
     setIsOpen(!isOpen); // Toggle the menu
@@ -20,15 +21,23 @@ export default function Header() {
     <header className="fixed top-0 left-0 w-full z-50 bg-transparent p-0">
       <nav className="flex items-center justify-between p-4 lg:px-2">
         <ul className="hidden lg:flex space-x-8 w-full">
-          <li><Link href="/about">ABOUT</Link></li>
-          <li><Link  href="/projects">PROJECTS</Link></li>
+          <li>
+            <Link href="/about" className={router.pathname === '/about' ? 'active' : ''}>ABOUT</Link>
+          </li>
+          <li>
+            <Link href="/projects" className={router.pathname === '/projects' ? 'active' : ''}>PROJECTS</Link>
+          </li>
           <li className='headLogo'>
             <Link href="/">
               <Image src={logoImage} alt="Home" width={80} height={80} />
             </Link>
           </li>
-          <li><Link href="/clients">CLIENTS</Link></li>
-          <li><Link href="/contact">CONTACT</Link></li>
+          <li>
+            <Link href="/clients" className={router.pathname === '/clients' ? 'active' : ''}>CLIENTS</Link>
+          </li>
+          <li>
+            <Link href="/contact" className={router.pathname === '/contact' ? 'active' : ''}>CONTACT</Link>
+          </li>
         </ul>
 
         {/* Hamburger Menu Icon for Small Screens */}
@@ -77,11 +86,21 @@ export default function Header() {
               &times; {/* Close icon */}
             </button>
             <ul className="space-y-12">
-              <li><Link href="/" onClick={closeMenu}>HOME</Link></li>
-              <li><Link href="/about" onClick={closeMenu}>ABOUT</Link></li>
-              <li><Link href="/projects" onClick={closeMenu}>PROJECTS</Link></li>
-              <li><Link href="/clients" onClick={closeMenu}>CLIENTS</Link></li>
-              <li><Link href="/contact" onClick={closeMenu}>CONTACT</Link></li>
+              <li>
+                <Link href="/" onClick={closeMenu} className={router.pathname === '/' ? 'active' : ''}>HOME</Link>
+              </li>
+              <li>
+                <Link href="/about" onClick={closeMenu} className={router.pathname === '/about' ? 'active' : ''}>ABOUT</Link>
+              </li>
+              <li>
+                <Link href="/projects" onClick={closeMenu} className={router.pathname === '/projects' ? 'active' : ''}>PROJECTS</Link>
+              </li>
+              <li>
+                <Link href="/clients" onClick={closeMenu} className={router.pathname === '/clients' ? 'active' : ''}>CLIENTS</Link>
+              </li>
+              <li>
+                <Link href="/contact" onClick={closeMenu} className={router.pathname === '/contact' ? 'active' : ''}>CONTACT</Link>
+              </li>
             </ul>
           </div>
         </div>

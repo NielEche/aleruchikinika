@@ -10,10 +10,12 @@ const useContentful = () => {
 
     const [records, setRecords] = useState([]);
     const [aboutRecord, setAboutRecord] = useState(null);
-    const [projects, setProjects] = useState([]); // State for projects
+    const [projects, setProjects] = useState([]);
+    const [clients, setClients] = useState([]); // State for clients
     const [loading, setLoading] = useState(true);
     const [loadingAbout, setLoadingAbout] = useState(true);
-    const [loadingProjects, setLoadingProjects] = useState(true); // Loading state for projects
+    const [loadingProjects, setLoadingProjects] = useState(true);
+    const [loadingClients, setLoadingClients] = useState(true); // Loading state for clients
 
     const getHomeContent = async () => {
         try {
@@ -49,36 +51,63 @@ const useContentful = () => {
         }
     };
 
-    // New function to fetch project content
     const getProjects = async () => {
         try {
-          const entries = await client.getEntries({
-            content_type: 'projects',
-            select: 'fields.title,fields.about,fields.cover,fields.images',
-          });
-          const sanitizedEntries = entries.items.map((item) => ({
-            id: item.sys.id, // Ensure you have the project ID
-            title: item.fields.title,
-            about: item.fields.about, // This may be rich text, hence it will be rendered as such
-            cover: item.fields.cover?.fields.file.url,
-            images: item.fields.images?.map(image => image.fields.file.url) || [],
-          }));
-          setProjects(sanitizedEntries);
+            const entries = await client.getEntries({
+                content_type: 'projects',
+                select: 'fields.title,fields.about,fields.cover,fields.images',
+            });
+            const sanitizedEntries = entries.items.map((item) => ({
+                id: item.sys.id,
+                title: item.fields.title,
+                about: item.fields.about,
+                cover: item.fields.cover?.fields.file.url,
+                images: item.fields.images?.map(image => image.fields.file.url) || [],
+            }));
+            setProjects(sanitizedEntries);
         } catch (error) {
-          console.error("Error Fetching Projects:", error);
+            console.error("Error Fetching Projects:", error);
         } finally {
-          setLoadingProjects(false);
+            setLoadingProjects(false);
         }
-      };
-      
+    };
+
+    // New function to fetch client content
+    const getClients = async () => {
+        try {
+            const entries = await client.getEntries({
+                content_type: 'clients',
+                select: 'fields.name,fields.image',
+            });
+            const sanitizedEntries = entries.items.map((item) => ({
+                name: item.fields.name,
+                image: item.fields.image?.fields.file.url,
+            }));
+            setClients(sanitizedEntries);
+        } catch (error) {
+            console.error("Error Fetching Clients:", error);
+        } finally {
+            setLoadingClients(false);
+        }
+    };
 
     useEffect(() => {
         getHomeContent();
         getAboutContent();
-        getProjects(); // Fetch Projects content
+        getProjects();
+        getClients(); // Fetch Clients content
     }, []);
 
-    return { records, loading, aboutRecord, loadingAbout, projects, loadingProjects };
+    return {
+        records,
+        loading,
+        aboutRecord,
+        loadingAbout,
+        projects,
+        loadingProjects,
+        clients,
+        loadingClients, // Return clients and loading state
+    };
 };
 
 export default useContentful;

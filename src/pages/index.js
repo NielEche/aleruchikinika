@@ -1,13 +1,14 @@
 import Image from "next/image";
 import useContentful from '../lib/useContentful'; // Import your custom hook
 import "../partials/home.css";
+import Loading from '../app/components/Loading';
 
 export default function Home() {
     const { records, loading } = useContentful(); // Fetch records and loading state
 
     // Handle loading state
     if (loading) {
-        return <div>Loading...</div>;
+        return <Loading />; 
     }
 
     // Utility function to shuffle an array

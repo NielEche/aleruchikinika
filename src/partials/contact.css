@@ -1,0 +1,8 @@
+.contact-container {
+  align-items: center;      /* Centers vertically */
+  min-height: 100vh;        /* Full height of the viewport */
+}
+
+.contact-container > div {
+  text-align: left;         /* Aligns text to the left */
+}

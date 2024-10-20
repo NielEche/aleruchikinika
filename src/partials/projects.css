@@ -1,0 +1,88 @@
+.project-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .project-card {
+    position: relative;
+    overflow: hidden;
+    width: 400px; /* Adjust size as needed */
+    height: 300px;
+    margin-bottom: 20px;
+  }
+  
+  .image-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+  
+  .project-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: filter 0.3s ease-in-out;
+    filter: grayscale(100%);
+  }
+  
+  .project-card:hover .project-image {
+    filter: grayscale(0%);
+  }
+  
+  .project-title {
+    position: absolute;
+    bottom: -100%;
+    left: 0;
+    width: 100%;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    text-align: left;
+    transition: bottom 0.3s ease-in-out;
+  }
+  
+  .project-card:hover .project-title {
+    bottom: 0;
+  }
+
+  .projectMain {
+    height: 500px;
+  }
+
+  /* Modal overlay */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8); /* Dark background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Ensure it appears on top */
+  }
+  
+  /* Modal content */
+  .modal-content {
+    position: relative;
+    max-width: 90%;
+    max-height: 90%;
+  }
+  
+  .modal-image {
+    width: 100%;
+    height: 600px;
+    object-fit: contain;
+  }
+  
+  /* Add cursor pointer for image click */
+  img {
+    cursor: pointer;
+  }
+  
+  .projectDoc {
+    height: 30rem;
+  }

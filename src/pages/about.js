@@ -1,12 +1,13 @@
 // src/pages/about.js
 import useContentful from '../lib/useContentful';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
+import Loading from '../app/components/Loading';
 
 const AboutPage = () => {
     const { aboutRecord, loadingAbout } = useContentful();
 
     if (loadingAbout) {
-        return <div>Loading...</div>;
+        return <Loading />; 
     }
 
     return (
