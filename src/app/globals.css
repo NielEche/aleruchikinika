@@ -1,0 +1,89 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@font-face {
+  font-family: 'MinionPro-Regular';
+  src: url('/fonts/MinionPro-Regular.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'orpheusproMedium'; /* Choose a custom name for your font */
+  src: url('/fonts/orpheuspro-medium.otf') format('opentype');
+}
+
+.MinionPro-Regular{
+  font-family: 'MinionPro-Regular' !important;
+}
+
+.orpheusproMedium{
+  font-family: 'orpheusproMedium' !important;
+}
+
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: 'MinionPro-Regular', Arial, Helvetica, sans-serif;
+  margin: 0;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+
+header {
+  background-color: #000;
+  padding: 1rem;
+}
+
+nav ul {
+  list-style-type: none;
+  display: flex;
+  justify-content: space-around;
+  font-family: 'MinionPro-Regular';
+}
+
+main {
+  padding: 2rem;
+}
+
+footer {
+  background-color: #f1f1f1;
+  text-align: center;
+  padding: 1rem;
+  margin-top: 2rem;
+}
+
+
+header li{
+  font-size: 12px;
+  margin-top: 10px;
+}
+
+@media (max-width: 900px) {
+  header li {
+    font-size: 18px;
+  }
+}
+
+
+.headLogo{
+  margin-top: 0px;
+}
+

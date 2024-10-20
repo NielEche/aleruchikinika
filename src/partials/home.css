@@ -1,0 +1,22 @@
+.sliderMain {
+    margin-top: 70px;
+}
+
+.slider-container {
+    overflow-x: auto;
+    white-space: nowrap;
+    scroll-behavior: smooth;
+}
+
+.slider-item {
+    width: 90vw;
+    margin-right: 5vw;
+    display: inline-block;
+    scroll-snap-align: start;
+}
+
+.scroll-smooth {
+    scroll-snap-type: x mandatory;
+}
+
+
