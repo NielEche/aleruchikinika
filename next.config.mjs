@@ -5,12 +5,13 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'images.ctfassets.net',
-        port: '', // Leave this empty if you're using the default port
-        pathname: '/**', // Allows all images from this domain
+        port: '',
+        pathname: '/**',
       },
     ],
+    unoptimized: true, // Disable image optimization for static export
   },
-  output: 'export', // Enable static export
+  output: 'export', // Static export
 };
 
 export default nextConfig;
