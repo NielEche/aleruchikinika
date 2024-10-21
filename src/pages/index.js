@@ -34,8 +34,7 @@ export default function Home() {
                     return (
                         <div 
                             key={index} 
-                            className="slider-item" 
-                            style={{ paddingLeft: index === 0 ? '50px' : '0' }} // Add padding for the first item
+                            className={`slider-item ${index === 0 ? 'pl-16 md:pl-0' : 'pl-0'}`} // Add left padding for the first item only on small screens
                         >
                             <Image
                                 src={imageUrl}
@@ -44,7 +43,7 @@ export default function Home() {
                                 className="object-cover homeImage"
                             />
                             <p 
-                                className={`absolute bottom-0 left-0 right-0 z-10 text-xs text-left text-white ${index === 0 ? 'pl-20' : ''} px-6 lg:px-16 py-4`} // Add padding for the first title
+                                className={`absolute bottom-0 left-0 right-0 z-10 text-xs text-left text-white ${index === 0 ? 'pl-20 md:pl-0' : ''} px-6 lg:px-16 py-4`} // Add padding for the first title only on small screens
                             >
                                 {record.title}
                             </p> {/* Display the title */}
