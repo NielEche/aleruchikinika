@@ -43,7 +43,7 @@ export default function Header() {
         {/* Hamburger Menu Icon for Small Screens */}
         <div className="block lg:hidden">
           <Link href="/" onClick={closeMenu}>
-            <Image src={logoImage} alt="Home" width={120} height={120} />
+            <Image src={logoImage} alt="Home" width={80} height={80} />
           </Link>
         </div>
                 

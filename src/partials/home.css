@@ -1,22 +1,49 @@
 .sliderMain {
-    margin-top: 70px;
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    height: 100vh; /* Set height for centering */
 }
 
 .slider-container {
-    overflow-x: auto;
-    white-space: nowrap;
-    scroll-behavior: smooth;
+    display: flex; /* Use Flexbox for horizontal layout */
+    overflow-x: auto; /* Enable horizontal scrolling */
+    scroll-behavior: smooth; /* Smooth scrolling */
+    max-height: 100%; /* Adjust based on how much of the screen you want to cover */
+    padding: 0; /* Remove any default padding */
+    scrollbar-width: none; /* For Firefox */
+    -ms-overflow-style: none; /* For Internet Explorer and Edge */
+}
+
+.slider-container::-webkit-scrollbar {
+    display: none; /* For Chrome, Safari, and Opera */
 }
 
 .slider-item {
-    width: 90vw;
-    margin-right: 5vw;
-    display: inline-block;
-    scroll-snap-align: start;
+    flex: 0 0 90vw; /* Each item takes up 90% of the viewport width */
+    display: flex; /* Allow items to be flex containers */
+    scroll-snap-align: start; /* Align items for smooth scrolling */
+    position: relative; /* For positioning children */
 }
 
 .scroll-smooth {
-    scroll-snap-type: x mandatory;
+    scroll-snap-type: x mandatory; /* Enable snap behavior for the container */
 }
 
+.homeImage {
+    position: relative !important;
+    object-fit: cover; /* Ensure images cover their container */
+    height: 100%; /* Use the full height of the item */
+}
 
+@media (max-width: 900px) {
+    .homeImage {
+        height: 30vh !important; /* Adjust height for mobile screens */
+    }
+}
+
+@media (min-width: 940px) {
+    .slider-item {
+        height: 100vh !important; /* Adjust height for larger screens */
+    }
+}

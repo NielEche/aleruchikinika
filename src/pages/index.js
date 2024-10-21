@@ -8,7 +8,7 @@ export default function Home() {
 
     // Handle loading state
     if (loading) {
-        return <Loading />; 
+        return <Loading />;
     }
 
     // Utility function to shuffle an array
@@ -24,39 +24,34 @@ export default function Home() {
     const shuffledRecords = shuffleArray([...records]);
 
     return (
-        <>
-            {/* Slider Container */}
-            <div className="overflow-x-auto relative">
-                <div className="flex space-x-4" style={{ minHeight: '300px' }}>
-                    {shuffledRecords.map((record, index) => {
-                        const imageUrl = record.image 
-                            ? `https:${record.image}`
-                            : '/placeholder.jpg'; // Fallback image if URL is missing
+        <div className="sliderMain">
+            <div className="slider-container scroll-smooth">
+                {shuffledRecords.map((record, index) => {
+                    const imageUrl = record.image 
+                        ? `https:${record.image}`
+                        : '/placeholder.jpg'; // Fallback image if URL is missing
 
-                        return (
-                            <div
-                                key={index}
-                                className="flex-shrink-0" 
-                                style={{
-                                    width: '90vw', // Each image takes up 90% of the viewport width
-                                    margin: '0', // Spacing to slightly show the next image
-                                }}>
-                               
-                                <div className="relative w-full h-screen"> {/* Set the width and height */}
-                                    <Image
-                                        src={imageUrl}
-                                        alt={record.title || "Home Image"}
-                                        fill // This replaces layout="fill"
-                                        className="object-cover"
-                                    />
-                                     <p className="z-100 absolute bottom-0 px-8 text-xs py-4 text-center ">{record.title}</p> {/* Display the title */}
-                                </div>
-                               
-                            </div>
-                        );
-                    })}
-                </div>
+                    return (
+                        <div 
+                            key={index} 
+                            className="slider-item" 
+                            style={{ paddingLeft: index === 0 ? '50px' : '0' }} // Add padding for the first item
+                        >
+                            <Image
+                                src={imageUrl}
+                                alt={record.title || "Home Image"}
+                                fill // This replaces layout="fill"
+                                className="object-cover homeImage"
+                            />
+                            <p 
+                                className={`absolute bottom-0 left-0 right-0 z-10 text-xs text-left text-white ${index === 0 ? 'pl-20' : ''} px-6 lg:px-16 py-4`} // Add padding for the first title
+                            >
+                                {record.title}
+                            </p> {/* Display the title */}
+                        </div>
+                    );
+                })}
             </div>
-        </>
+        </div>
     );
 }
