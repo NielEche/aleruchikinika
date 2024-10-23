@@ -99,4 +99,8 @@
   .modal-image  {
       height: 90vh !important; 
   }
+
+  .projectDoc {
+    height: 20rem;
+  }
   }

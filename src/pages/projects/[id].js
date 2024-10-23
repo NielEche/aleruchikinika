@@ -82,14 +82,14 @@ const ProjectDetail = () => {
       <hr />
 
       <div 
-        className='flex overflow-x-scroll overflow-auto mt-10' 
+        className='lg:flex lg:overflow-x-scroll overflow-auto lg:mt-10 mt-4 pb-4' 
         onWheel={handleWheel} // Add wheel event to the container
         ref={scrollRef} // Reference to the container
       >
         {project.images.map((image, idx) => (
           <div className='flex-shrink-0' key={idx}> {/* Set width for each image container */}
             <Image
-              className='w-full object-contain projectDoc py-4 cursor-pointer'
+              className='w-full object-contain projectDoc lg:py-4 cursor-pointer'
               src={`https:${image}`} // Prepend https: if necessary
               alt={`${project.title} image ${idx + 1}`}
               width={400} // Specify width
