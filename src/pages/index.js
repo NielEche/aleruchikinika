@@ -11,7 +11,7 @@ export default function Home() {
 
     // Handle loading state
     if (loadingProjects) {
-        return <Loading projects={projects} />; // Pass project images to Loading component
+        return <Loading projects={projects} />;
     }
 
     // Function to open the modal with the specific image URL
@@ -23,7 +23,6 @@ export default function Home() {
     // Function to close the modal
     const closeModal = () => {
         setIsModalOpen(false);
-        // Do not clear modalImageUrl to keep the same image when reopened
     };
 
     return (
@@ -43,14 +42,14 @@ export default function Home() {
                                 src={imageUrl}
                                 alt={record.title || "Home Image"}
                                 fill // This replaces layout="fill"
-                                className="object-cover homeImage cursor-pointer" // Add pointer cursor
-                                onClick={() => openModal(imageUrl)} // Open modal on click
+                                className="object-cover homeImage cursor-pointer"
+                                onClick={() => openModal(imageUrl)} 
                             />
                             <p 
                                 className={`absolute bottom-0 left-0 right-0 z-10 text-xs text-left text-white ${index === 0 ? 'pl-20 md:pl-0' : ''} px-6 lg:px-16 py-4`} // Add padding for the first title only on small screens
                             >
                                 {record.title}
-                            </p> {/* Display the title */}
+                            </p>
                         </div>
                     );
                 })}
@@ -65,7 +64,7 @@ export default function Home() {
                             alt="Modal Image"
                             width={800}
                             height={500}
-                            className="object-contain" // Ensure the image fits within the modal
+                            className="object-contain"
                         />
                         <button 
                             className="absolute top-4 right-4 text-white text-lg bg-black p-2 rounded-full" 
