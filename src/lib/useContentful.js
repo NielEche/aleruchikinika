@@ -1,5 +1,5 @@
 import { createClient } from 'contentful';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 
 const useContentful = () => {
     const client = createClient({
@@ -11,22 +11,13 @@ const useContentful = () => {
     const [records, setRecords] = useState([]);
     const [aboutRecord, setAboutRecord] = useState(null);
     const [projects, setProjects] = useState([]);
-    const [clients, setClients] = useState([]); // State for clients
+    const [clients, setClients] = useState([]);
     const [loading, setLoading] = useState(true);
     const [loadingAbout, setLoadingAbout] = useState(true);
     const [loadingProjects, setLoadingProjects] = useState(true);
-    const [loadingClients, setLoadingClients] = useState(true); // Loading state for clients
+    const [loadingClients, setLoadingClients] = useState(true);
 
-    // Utility function to shuffle an array
-    const shuffleArray = (array) => {
-        for (let i = array.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]]; // Swap elements
-        }
-        return array;
-    };
-
-    const getHomeContent = async () => {
+    const getHomeContent = useCallback(async () => {
         try {
             const entries = await client.getEntries({
                 content_type: 'home',
@@ -36,16 +27,15 @@ const useContentful = () => {
                 title: item.fields.title,
                 image: item.fields.image?.fields.file.url,
             }));
-            // Shuffle the records before setting them in state
-            setRecords(shuffleArray(sanitizedEntries));
+            setRecords(sanitizedEntries);
         } catch (error) {
             console.error("Error Fetching Home Content:", error);
         } finally {
             setLoading(false);
         }
-    };
+    }, [client]);
 
-    const getAboutContent = async () => {
+    const getAboutContent = useCallback(async () => {
         try {
             const entries = await client.getEntries({
                 content_type: 'about',
@@ -59,9 +49,9 @@ const useContentful = () => {
         } finally {
             setLoadingAbout(false);
         }
-    };
+    }, [client]);
 
-    const getProjects = async () => {
+    const getProjects = useCallback(async () => {
         try {
             const entries = await client.getEntries({
                 content_type: 'projects',
@@ -80,10 +70,9 @@ const useContentful = () => {
         } finally {
             setLoadingProjects(false);
         }
-    };
+    }, [client]);
 
-    // New function to fetch client content
-    const getClients = async () => {
+    const getClients = useCallback(async () => {
         try {
             const entries = await client.getEntries({
                 content_type: 'clients',
@@ -99,14 +88,14 @@ const useContentful = () => {
         } finally {
             setLoadingClients(false);
         }
-    };
+    }, [client]);
 
     useEffect(() => {
         getHomeContent();
         getAboutContent();
         getProjects();
-        getClients(); // Fetch Clients content
-    }, []);
+        getClients();
+    }, [getHomeContent, getAboutContent, getProjects, getClients]);
 
     return {
         records,
@@ -116,7 +105,7 @@ const useContentful = () => {
         projects,
         loadingProjects,
         clients,
-        loadingClients, // Return clients and loading state
+        loadingClients,
     };
 };
 
