@@ -33,11 +33,18 @@
   }
 }
 
-body {
+html, body {
   color: var(--foreground);
   background: #000;
   font-family: 'MinionPro-Regular', Arial, Helvetica, sans-serif;
   margin: 0;
+  height: 100%;
+}
+
+
+.mainSec {
+  height: 100vh; /* Full viewport height */
+  overflow-y: auto; /* Allow vertical scrolling only when necessary */
 }
 
 @layer utilities {

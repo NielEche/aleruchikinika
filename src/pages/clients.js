@@ -4,13 +4,15 @@ import Image from 'next/image';
 
 const Clients = () => {
   const { clients, loadingClients } = useContentful();
+  const { projects, loadingProjects } = useContentful();
 
-  if (loadingClients) {
-    return <Loading />; 
+  // Handle loading state
+  if (loadingProjects) {
+      return <Loading projects={projects} />; // Pass project images to Loading component
   }
 
   return (
-    <div className='mainCon lg:px-20 px-10'>
+    <div className='mainSec mainCon lg:px-20 px-10'>
       <h1  className='py-10 text-xl orpheusproMedium'>Clients</h1>
       <div className="clients-list lg:flex">
         {clients.map((client, idx) => (

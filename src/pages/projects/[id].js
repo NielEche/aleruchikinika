@@ -15,9 +15,11 @@ const ProjectDetail = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
 
-  if (loadingProjects) {
-    return <Loading />; 
-  }
+
+    // Handle loading state
+    if (loadingProjects) {
+        return <Loading projects={projects} />; // Pass project images to Loading component
+    }
 
   // Find the project by ID
   const project = projects.find((proj) => proj.id === id);
@@ -39,7 +41,7 @@ const ProjectDetail = () => {
   };
 
   return (
-    <div className='mainCon lg:px-20 px-10'>
+    <div className='mainSec mainCon lg:px-20 px-10'>
       <div className='lg:flex justify-between mb-10'>
         <div className='w-full lg:px-16 py-10'>
           <h1 className='text-2xl orpheusproMedium'>{project.title}</h1>

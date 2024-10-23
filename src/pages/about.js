@@ -5,13 +5,15 @@ import Loading from '../app/components/Loading';
 
 const AboutPage = () => {
     const { aboutRecord, loadingAbout } = useContentful();
+    const { projects, loadingProjects } = useContentful();
 
-    if (loadingAbout) {
-        return <Loading />; 
+    // Handle loading state
+    if (loadingProjects) {
+        return <Loading projects={projects} />; // Pass project images to Loading component
     }
 
     return (
-        <div className="flex items-center justify-center min-h-screen bg-black">
+        <div className="mainSec flex items-center justify-center min-h-screen bg-black">
             <div className="text-center p-6 bg-black text-white lg:flex justify-between">
               <div className=' px-6 lg:px-4  w-full'>
                   <h1 className="text-5xl lg:text-center text-left font-bold mb-4 orpheusproMedium">Aleruchi Kinika</h1>

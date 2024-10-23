@@ -17,6 +17,15 @@ const useContentful = () => {
     const [loadingProjects, setLoadingProjects] = useState(true);
     const [loadingClients, setLoadingClients] = useState(true); // Loading state for clients
 
+    // Utility function to shuffle an array
+    const shuffleArray = (array) => {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]]; // Swap elements
+        }
+        return array;
+    };
+
     const getHomeContent = async () => {
         try {
             const entries = await client.getEntries({
@@ -27,7 +36,8 @@ const useContentful = () => {
                 title: item.fields.title,
                 image: item.fields.image?.fields.file.url,
             }));
-            setRecords(sanitizedEntries);
+            // Shuffle the records before setting them in state
+            setRecords(shuffleArray(sanitizedEntries));
         } catch (error) {
             console.error("Error Fetching Home Content:", error);
         } finally {

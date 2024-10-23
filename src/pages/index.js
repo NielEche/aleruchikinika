@@ -1,32 +1,35 @@
 import Image from "next/image";
+import { useState } from "react"; // Import useState
 import useContentful from '../lib/useContentful'; // Import your custom hook
 import "../partials/home.css";
 import Loading from '../app/components/Loading';
 
 export default function Home() {
-    const { records, loading } = useContentful(); // Fetch records and loading state
+    const { records, loading, projects, loadingProjects } = useContentful(); // Fetch records and loading state
+    const [isModalOpen, setIsModalOpen] = useState(false); // Modal state
+    const [modalImageUrl, setModalImageUrl] = useState(''); // Store the clicked image URL
 
     // Handle loading state
-    if (loading) {
-        return <Loading />;
+    if (loadingProjects) {
+        return <Loading projects={projects} />; // Pass project images to Loading component
     }
 
-    // Utility function to shuffle an array
-    const shuffleArray = (array) => {
-        for (let i = array.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]]; // Swap elements
-        }
-        return array;
+    // Function to open the modal with the specific image URL
+    const openModal = (imageUrl) => {
+        setModalImageUrl(imageUrl); // Set the image URL for the modal
+        setIsModalOpen(true); // Open the modal
     };
 
-    // Shuffle records for random display
-    const shuffledRecords = shuffleArray([...records]);
+    // Function to close the modal
+    const closeModal = () => {
+        setIsModalOpen(false);
+        // Do not clear modalImageUrl to keep the same image when reopened
+    };
 
     return (
-        <div className="sliderMain">
+        <div className="mainSec sliderMain">
             <div className="slider-container scroll-smooth">
-                {shuffledRecords.map((record, index) => {
+                {records.map((record, index) => {
                     const imageUrl = record.image 
                         ? `https:${record.image}`
                         : '/placeholder.jpg'; // Fallback image if URL is missing
@@ -40,7 +43,8 @@ export default function Home() {
                                 src={imageUrl}
                                 alt={record.title || "Home Image"}
                                 fill // This replaces layout="fill"
-                                className="object-cover homeImage"
+                                className="object-cover homeImage cursor-pointer" // Add pointer cursor
+                                onClick={() => openModal(imageUrl)} // Open modal on click
                             />
                             <p 
                                 className={`absolute bottom-0 left-0 right-0 z-10 text-xs text-left text-white ${index === 0 ? 'pl-20 md:pl-0' : ''} px-6 lg:px-16 py-4`} // Add padding for the first title only on small screens
@@ -51,6 +55,27 @@ export default function Home() {
                     );
                 })}
             </div>
+
+            {/* Modal */}
+            {isModalOpen && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75">
+                    <div className="relative w-full max-w-3xl">
+                        <Image
+                            src={modalImageUrl}
+                            alt="Modal Image"
+                            width={800}
+                            height={500}
+                            className="object-contain" // Ensure the image fits within the modal
+                        />
+                        <button 
+                            className="absolute top-4 right-4 text-white text-lg bg-black p-2 rounded-full" 
+                            onClick={closeModal}
+                        >
+                            &times; {/* Close button */}
+                        </button>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }

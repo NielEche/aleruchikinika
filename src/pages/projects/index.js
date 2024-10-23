@@ -8,8 +8,9 @@ import Image from 'next/image';
 const ProjectsPage = () => {
   const { projects, loadingProjects } = useContentful();
 
+  // Handle loading state
   if (loadingProjects) {
-    return <Loading />; 
+      return <Loading projects={projects} />; // Pass project images to Loading component
   }
 
   const formatImageUrl = (url) => {
@@ -18,7 +19,7 @@ const ProjectsPage = () => {
   };
 
   return (
-    <div className='mainCon lg:px-20 px-10'>
+    <div className='mainSec mainCon lg:px-20 px-10'>
       <h1 className='py-10 text-xl orpheusproMedium'>Projects</h1>
       <div className="project-list lg:grid grid-cols-3 gap-4">
         {projects.map((project) => (
