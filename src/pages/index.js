@@ -11,7 +11,7 @@ export default function Home() {
 
     // Handle loading state
     if (loadingProjects) {
-        return <Loading projects={projects} />;
+        return <Loading projects={projects} />; // Pass project images to Loading component
     }
 
     // Function to open the modal with the specific image URL
@@ -57,7 +57,7 @@ export default function Home() {
 
             {/* Modal */}
             {isModalOpen && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75">
+                <div className="fixed modalBox inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75">
                     <div className="relative w-full max-w-3xl">
                         <Image
                             src={modalImageUrl}
@@ -67,7 +67,7 @@ export default function Home() {
                             className="object-contain"
                         />
                         <button 
-                            className="absolute top-4 right-4 text-white text-lg bg-black p-2 rounded-full" 
+                            className="absolute top-0 right-2 text-3xl text-red-700 p-2 rounded-full" 
                             onClick={closeModal}
                         >
                             &times; {/* Close button */}

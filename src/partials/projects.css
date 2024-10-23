@@ -47,8 +47,14 @@
     bottom: 0;
   }
 
+  .pHouse {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
   .projectMain {
-    height: 500px;
+    height: 300px;
   }
 
   /* Modal overlay */
@@ -85,4 +91,12 @@
   
   .projectDoc {
     height: 30rem;
+  }
+
+  
+
+@media (max-width: 900px) {
+  .modal-image  {
+      height: 90vh !important; 
+  }
   }

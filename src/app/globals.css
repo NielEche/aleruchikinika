@@ -42,11 +42,6 @@ html, body {
 }
 
 
-.mainSec {
-  height: 100vh; /* Full viewport height */
-  overflow-y: auto; /* Allow vertical scrolling only when necessary */
-}
-
 @layer utilities {
   .text-balance {
     text-wrap: balance;
@@ -126,3 +121,9 @@ nav a:active {
 nav .active {
   color: red; 
 }
+
+@media (max-width: 900px) {
+  .modal-image  {
+      height: 90vh !important; 
+  }
+  }

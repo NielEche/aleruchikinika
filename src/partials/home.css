@@ -40,6 +40,17 @@
     .homeImage {
         height: 30vh !important; /* Adjust height for mobile screens */
     }
+
+    .mainSec {
+        display: flex;                     
+        justify-content: center;           
+        align-items: center;                
+        height: 90vh !important;                 
+        background-color: black;      
+    }
+    .modalBox {
+        height: 90vh !important;
+    }
 }
 
 @media (min-width: 940px) {
