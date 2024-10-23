@@ -41,7 +41,7 @@ const Loading = () => {
                 ) : (
                     // Placeholder skeletons (e.g., simple gray boxes or a spinner)
                     Array(3).fill().map((_, index) => (
-                        <div key={index} className="w-10 h-20 bg-gray-700 animate-pulse"></div>
+                        <div key={index} className="w-8 h-16 bg-red-950 animate-pulse"></div>
                     ))
                 )}
             </div>
